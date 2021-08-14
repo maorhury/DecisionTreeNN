@@ -91,7 +91,7 @@ class DecisionTreeVgg(torch.nn.Module):
         forwards tensors through the pretrained first-race network and returns fc7 result
         """
         tmp_classifier_saver = self.first_race_network[0].classifier
-        self.first_race_network[0].classifier = nn.Sequential(*[self.first_race_network[0].classifier[i] for i in range(4)]) # temporarily delete the last layer from the network
+        self.first_race_network[0].classifier = nn.Sequential(*[self.first_race_network[0].classifier[i] for i in range(5)]) # temporarily delete the last layer from the network
         self.first_race_network[0].cuda()
         fc7_results = self.first_race_network[0](images) # forward througth the truncated network
         self.first_race_network[0].classifier = tmp_classifier_saver # restore the full network
@@ -102,7 +102,7 @@ class DecisionTreeVgg(torch.nn.Module):
         forwards tensors through the pretrained second-race network and returns fc7 result
         """
         tmp_classifier_saver = self.second_race_network[0].classifier
-        self.first_race_network[0].classifier = nn.Sequential(*[self.second_race_network[0].classifier[i] for i in range(4)]) # temporarily delete the last layer from the network
+        self.first_race_network[0].classifier = nn.Sequential(*[self.second_race_network[0].classifier[i] for i in range(5)]) # temporarily delete the last layer from the network
         self.second_race_network[0].cuda()
         fc7_results = self.second_race_network[0](images) # forward througth the truncated network
         self.second_race_network[0].classifier = tmp_classifier_saver # restore the full network
